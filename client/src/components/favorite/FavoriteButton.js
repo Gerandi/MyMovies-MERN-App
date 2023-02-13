@@ -1,30 +1,55 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./favorite-button.scss";
 
-const Favorite = ({ isFavorited, movieId }) => {
-  const [isFavorite, setIsFavorite] = useState(isFavorited);
+function FavoriteButton({ itemId }) {
+  const [isLoading, setLoading] = useState(false);
+  const [isFavorite, setFavorite] = useState(false);
 
-  const handleFavorite = async () => {
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const response = await axios.get(`/api/favorites/${itemId}`);
+        setFavorite(response.data.isFavorite);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [itemId]);
+
+  async function handleClick() {
+    setLoading(true);
     try {
-      const method = isFavorite ? 'delete' : 'post';
-      const response = await axios[method](`/api/favorites`, {
-        data: {
-          movieId
-        }
+      const response = await axios.post(`/api/favorites/${itemId}`, {
+        isFavorite: !isFavorite
       });
-
-      setIsFavorite(!isFavorite);
+      setFavorite(response.data.isFavorite);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
-  };
+  }
 
   return (
-    <button className="" onClick={handleFavorite}>
-      <i className={`bi bi-heart${isFavorite ? '-fill' : ''}`}></i>
-      {isFavorite ? 'Unfavorite' : 'Favorite'}
+    <button
+      className={`btn btn-sm favorite-button ${isLoading ? "loading" : ""}`}
+      onClick={handleClick}
+      disabled={isLoading}
+    >
+      {isLoading ? (
+        <i className="bi bi-spinner-fill "></i>
+      ) : (
+        <i className={`bi ${isFavorite ? "bi-heart-fill" : "bi-heart"}`} />
+      )}
+      Favorite
     </button>
   );
-};
+}
 
-export default Favorite;
+export default FavoriteButton;
