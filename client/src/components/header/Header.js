@@ -18,7 +18,7 @@ const headerNav = [
   },
   {
     display: 'Login',
-    path: '/auth',
+    path: '/login',
   }
   
 ];
