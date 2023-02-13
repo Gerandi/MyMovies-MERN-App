@@ -36,7 +36,7 @@ const HeroSlide = () => {
         grabCursor={true}
         spaceBetween={0}
         slidesPerView={1}
-        autoplay={{delay: 5000}}
+        autoplay={{ delay: 5000 }}
       >
         {movieItems.map((item, i) => (
           <SwiperSlide key={i}>
@@ -93,10 +93,10 @@ const HeroSlideItem = (props) => {
           <div className='overview'>{item.overview}</div>
           <div className='btns'>
             <Button onClick={() => navigate('/movie/' + item.id)}>
-              Watch now
+              Details
             </Button>
             <OutlineButton onClick={setModalActive}>
-              Watch trailer
+            <i class="bi bi-play"> </i>Trailer
             </OutlineButton>
           </div>
         </div>

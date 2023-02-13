@@ -1,7 +1,7 @@
 import './App.scss';
 import 'swiper/css';
-import './assets/boxicons-2.0.7/css/boxicons.min.css';
 import './App.scss';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/header/Header';

@@ -6,6 +6,9 @@ import './detail.scss';
 import CastList from './CastList';
 import VideoList from './VideoList';
 import MovieList from '../../components/movie-list/MovieList';
+import FavoriteButton from '../../components/favorite/FavoriteButton';
+
+
 
 const Detail = () => {
   const { category, id } = useParams();
@@ -54,6 +57,10 @@ const Detail = () => {
                   ))}
               </div>
               <p className='overview'>{item.overview}</p>
+              <FavoriteButton
+                isFavorited={item.isFavorited}
+                movieId={item.id}
+              />
               <div className='cast'>
                 <div className='section__header'>
                   <h2>Casts</h2>
