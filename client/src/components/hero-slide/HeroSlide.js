@@ -95,7 +95,7 @@ const HeroSlideItem = (props) => {
             <Button onClick={() => navigate('/movie/' + item.id)}>
               Details
             </Button>
-            <OutlineButton onClick={setModalActive}>
+            <OutlineButton className='trailer' onClick={setModalActive}>
             <i class="bi bi-play"> </i>Trailer
             </OutlineButton>
           </div>

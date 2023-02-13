@@ -23,21 +23,30 @@ button {
 }
 
 .btn-outline {
-    border: 3px solid $white;
+    border: 3px solid $main-color;
     background-color: transparent;
-    color: $white;
+    color: $main-color;
     box-shadow: unset;
     transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .btn-outline:hover {
+    border: 3px solid $main-color;
     box-shadow: unset;
-    color: $main-color;
-    background-color: $white;
+    color: $white;
+    background-color: $main-color;
 }
 
 .btn.small {
     border-width: 2px;
     padding: 0.25rem 1.5rem;
     font-size: 1rem;
+}
+
+.btn-trailer {
+    border: 3px solid $main-color;
+    background-color: transparent;
+    color: $main-color;
+    box-shadow: unset;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
