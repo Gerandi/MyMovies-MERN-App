@@ -20,7 +20,7 @@ const Favorite = ({ isFavorited, movieId }) => {
   };
 
   return (
-    <button className="btn btn-primary" onClick={handleFavorite}>
+    <button className="favorite-button" onClick={handleFavorite}>
       <i className={`bi bi-heart${isFavorite ? '-fill' : ''}`}></i>
       {isFavorite ? 'Unfavorite' : 'Favorite'}
     </button>

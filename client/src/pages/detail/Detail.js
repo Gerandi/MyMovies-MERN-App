@@ -63,7 +63,7 @@ const Detail = () => {
               />
               <div className='cast'>
                 <div className='section__header'>
-                  <h2>Casts</h2>
+                  <h2>Cast</h2>
                 </div>
                 <CastList id={item.id} />
               </div>
