@@ -30,7 +30,6 @@ module.exports = {
         User.findOne({ email: req.body.email})
             .then((userRecord) => {
                 //check if this returned object is null
-
                 if(userRecord === null){
                     //email not found
                     res.status(400).json({message: "Invalid login attempt"});
@@ -66,7 +65,7 @@ module.exports = {
                             }
                         })
                         .catch((err) => {
-                            console.log("error with compare pws")
+                            console.log(err)
                             res.status(400).json({message: "Invalid login attempt"});
                         })
                 }

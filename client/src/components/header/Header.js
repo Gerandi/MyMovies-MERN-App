@@ -9,6 +9,10 @@ const headerNav = [
     path: '/',
   },
   {
+    display: 'MyFavorites',
+    path: ''
+  },
+  {
     display: 'Movies',
     path: '/movie',
   },
@@ -19,7 +23,8 @@ const headerNav = [
   {
     display: 'Login',
     path: '/login',
-  }
+  },
+ 
   
 ];
 

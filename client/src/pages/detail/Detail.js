@@ -13,8 +13,8 @@ import FavoriteButton from '../../components/favorite/FavoriteButton';
 const Detail = () => {
   const { category, id } = useParams();
   const [item, setItem] = useState(null);
-
-  useEffect(() => {
+  const [token,setToken] = useState(localStorage.getItem("jwt"))
+  useEffect(() => { 
     const getDetail = async () => {
       const response = await tmdbApi.detail(category, id, { params: {} });
       setItem(response);
@@ -57,10 +57,11 @@ const Detail = () => {
                   ))}
               </div>
               <p className='overview'>{item.overview}</p>
-              <FavoriteButton
+              <FavoriteButton 
                 isFavorited={item.isFavorited}
                 movieId={item.id}
               />
+              { token ? !null :<p style={{color:"red"}}>*Sorry , you can't add movies to favorites if you are not a user!</p>}
               <div className='cast'>
                 <div className='section__header'>
                   <h2>Cast</h2>

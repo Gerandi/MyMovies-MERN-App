@@ -5,9 +5,12 @@ import "./favorite-button.scss";
 function FavoriteButton({ itemId }) {
   const [isLoading, setLoading] = useState(false);
   const [isFavorite, setFavorite] = useState(false);
-
+  const [token,setToken] = useState(localStorage.getItem("jwt"))
+  
+ 
   useEffect(() => {
     async function fetchData() {
+
       setLoading(true);
       try {
         const response = await axios.get(`/api/favorites/${itemId}`);
@@ -15,10 +18,12 @@ function FavoriteButton({ itemId }) {
       } catch (error) {
         console.error(error);
       } finally {
+        if (token !== null){
+
         setLoading(false);
       }
     }
-
+  }
     fetchData();
   }, [itemId]);
 
