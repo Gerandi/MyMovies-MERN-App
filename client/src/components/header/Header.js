@@ -10,7 +10,7 @@ const headerNav = [
   },
   {
     display: 'MyFavorites',
-    path: ''
+    path: '/favorites'
   },
   {
     display: 'Movies',

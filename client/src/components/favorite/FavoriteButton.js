@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./favorite-button.scss";
 
-function FavoriteButton({ itemId }) {
+function FavoriteButton({ movieId }) {
   const [isLoading, setLoading] = useState(false);
   const [isFavorite, setFavorite] = useState(false);
   const [token,setToken] = useState(localStorage.getItem("jwt"))
@@ -13,7 +13,7 @@ function FavoriteButton({ itemId }) {
 
       setLoading(true);
       try {
-        const response = await axios.get(`/api/favorites/${itemId}`);
+        const response = await axios.get(`/api/favorites/${movieId}`);
         setFavorite(response.data.isFavorite);
       } catch (error) {
         console.error(error);
@@ -25,15 +25,14 @@ function FavoriteButton({ itemId }) {
     }
   }
     fetchData();
-  }, [itemId]);
+  }, [movieId]);
 
   async function handleClick() {
+    console.log(movieId,"itemid")
     setLoading(true);
     try {
-      const response = await axios.post(`/api/favorites/${itemId}`, {
-        isFavorite: !isFavorite
-      });
-      setFavorite(response.data.isFavorite);
+      const response = await localStorage.setItem('movies',JSON.stringify( movieId));
+      // setFavorite(response.data.isFavorite);
     } catch (error) {
       console.error(error);
     } finally {
