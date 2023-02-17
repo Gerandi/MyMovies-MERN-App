@@ -31,8 +31,7 @@ function FavoriteView() {
 
   return (
     <div>
-      <h1>Favorite View</h1>
-      <table className="table">
+     { token !==null ? <><h1>Favorite View</h1><table className="table">
         <thead>
           <tr>
             <th scope="col">Title</th>
@@ -51,7 +50,7 @@ function FavoriteView() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table></>:<div><h1>Please Login to see your favourite Movies</h1></div>}
     </div>
   );
 }

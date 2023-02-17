@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './header.scss';
 import logo from '../../assets/main-logo.png';
+import { useState } from 'react';
 
 const headerNav = [
   {
@@ -10,7 +11,8 @@ const headerNav = [
   },
   {
     display: 'MyFavorites',
-    path: '/favorites'
+    path: '/favorites',
+    disabled:localStorage.getItem("jwt") == null
   },
   {
     display: 'Movies',
@@ -29,11 +31,16 @@ const headerNav = [
 ];
 
 const Header = () => {
+
   const { pathname } = useLocation();
   const headerRef = useRef(null);
+  const [token, setToken] = useState(localStorage.getItem("jwt"));
 
   const active = headerNav.findIndex((e) => e.path === pathname);
-
+  const logoutHandler = () => {
+    localStorage.removeItem("jwt")
+    window.location.reload()
+  }
   useEffect(() => {
     const shrinkHeader = () => {
       if (
@@ -64,6 +71,9 @@ const Header = () => {
               <Link to={e.path}>{e.display}</Link>
             </li>
           ))}
+            {token !==null ?<li className='signout' onClick={logoutHandler}>Logout
+             <i style={{marginLeft:"7px"}} class="bi bi-box-arrow-right"></i>
+            </li>:null}
         </ul>
       </div>
     </div>

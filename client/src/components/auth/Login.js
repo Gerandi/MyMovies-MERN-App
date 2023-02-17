@@ -14,7 +14,7 @@ const Login = () => {
         password
     }
     const LoginHandle = () => {
-        axios.post('http://localhost:8000/api/users/login', user).then(res => {localStorage.setItem('jwt', '124q3cdfgdraw3q244444w555cfgudtse57w34s5eu8cfise58');navigate("/")})
+        axios.post('http://localhost:8000/api/users/login', user).then(res => {localStorage.setItem('jwt', '124q3cdfgdraw3q244444w555cfgudtse57w34s5eu8cfise58');navigate("/");window.location.reload()})
     }
     return (
         <div className='login-container'>
