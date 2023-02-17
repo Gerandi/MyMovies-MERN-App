@@ -74,7 +74,7 @@ const Header = () => {
             </li>
           ))}
             {token ==null ?<li className='signout' onClick={loginHandler}>Login
-            </li>:<l1 >{loggeduser?.name}</l1>}
+            </li>:<l1 >Hi, {loggeduser?.name}</l1>}
 
             {token !==null ?<li className='signout' onClick={logoutHandler}>Logout
              <i style={{marginLeft:"7px"}} class="bi bi-box-arrow-right"></i>
