@@ -3,24 +3,28 @@ import axios from "../../api/apiFavorites";
 
 import "./favorite-button.scss";
 
-function FavoriteButton({ userId, movieId }) {
+function FavoriteButton({ movieId }) {
   const [favorite, setFavorite] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("jwt"));
-  const [btnndisable,setBtnndisable] = useState()
+  const [btnndisable, setBtnndisable] = useState()
   const [loggeduseremail] = useState(localStorage.getItem("loggeduser"))
-  const [loggeduser,setLogedduser] = useState()
-  
-  useEffect(() => {
-    axios.get(`http://localhost:8000/api/users/loggeduser?email=${loggeduseremail}`).then(res=>{setLogedduser(res.data.user)})
+  const [loggeduser, setLogedduser] = useState()
 
-    if(token == null){
-      setBtnndisable({backgroundColor:"white",color:"black",boxShadow:"0px 0px 2px 2px",cursor:"not-allowed"})
+  const userId = "63ef4ae6725f5ee3273ac5e6";
+
+  useEffect(() => {
+    axios.get(`http://localhost:8000/api/users/loggeduser?email=${loggeduseremail}`).then(res => { setLogedduser(res.data.user) })
+
+    if (token == null) {
+      setBtnndisable({ backgroundColor: "white", color: "black", boxShadow: "0px 0px 2px 2px", cursor: "not-allowed" })
     }
     async function fetchData() {
       try {
-        const response = await axios.get(`/api/favorites/${loggeduser._id}/${movieId}`);
-        setFavorite(response.data);
+        const response = await axios.get(`/api/favorites/${userId}/${movieId}`);
+        setFavorite(true);
+        console.log(response.data);
       } catch (error) {
+        setFavorite(false);
         console.error(error);
       }
     }
@@ -29,8 +33,9 @@ function FavoriteButton({ userId, movieId }) {
 
   const addFavorite = async () => {
     try {
-      const response = await axios.post(`/api/favorites/` , { userId, movieId });
-      setFavorite(response.data);
+      const response = await axios.post(`/api/favorites/`, { userId, movieId });
+      console.log(response.data);
+      setFavorite(true);
     } catch (error) {
       console.error(error);
     }
@@ -39,8 +44,9 @@ function FavoriteButton({ userId, movieId }) {
 
   const removeFavorite = async () => {
     try {
-      const response = await axios.delete(`/api/favorites/${loggeduser._id}/${movieId}`);
-      setFavorite(response.data);
+      const response = await axios.delete(`/api/favorites/${userId}/${movieId}`);
+      setFavorite(false);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

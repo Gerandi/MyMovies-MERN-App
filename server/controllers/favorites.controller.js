@@ -4,7 +4,7 @@ const Favorite = require('../models/favorite.model');
 exports.create = async (req, res) => {
   try {
     const favorite = new Favorite({
-      userId: req.params.userId, // Get user id from the authenticated user
+      userId: req.body.userId, // Get user id from the authenticated user
       movieId: req.body.movieId,
     });
 

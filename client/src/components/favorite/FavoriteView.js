@@ -18,7 +18,7 @@ function FavoriteView() {
 
       setLoading(true);
       try {
-        const response = await axios.get(`/api/favorites/`);
+        const response = await axios.get(`/api/favorites/${loggeduser._id}`);
         setFavorites(response.data);
       } catch (error) {
         console.error(error);
@@ -30,7 +30,7 @@ function FavoriteView() {
     }
   }
     fetchData();
-  }, [token]);
+  }, [token, loggeduser._id]);
 
   return (
     <div>
