@@ -9,8 +9,11 @@ function FavoriteView() {
   const [isLoading, setLoading] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const [token,setToken] = useState(localStorage.getItem("jwt"))
-
+  const [loggeduseremail] = useState(localStorage.getItem("loggeduser"))
+  const [loggeduser,setLogedduser] = useState()
   useEffect(() => {
+    axios.get(`http://localhost:8000/api/users/loggeduser?email=${loggeduseremail}`).then(res=>{setLogedduser(res.data.user);console.log(res.data.user._id,"resss")})
+
     async function fetchData() {
 
       setLoading(true);
