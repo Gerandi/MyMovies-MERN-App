@@ -2,58 +2,60 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./favorite-button.scss";
 
-function FavoriteButton({ itemId }) {
-  const [isLoading, setLoading] = useState(false);
-  const [isFavorite, setFavorite] = useState(false);
-  const [token,setToken] = useState(localStorage.getItem("jwt"))
-  
- 
+function FavoriteButton(props) {
+  const [favorite, setFavorite] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("jwt"));
+
   useEffect(() => {
     async function fetchData() {
-
-      setLoading(true);
       try {
-        const response = await axios.get(`/api/favorites/${itemId}`);
-        setFavorite(response.data.isFavorite);
+        const response = await axios.get(`http://localhost:8000/api/favorites/${props.movieId}`);
+        setFavorite(response.data);
       } catch (error) {
         console.error(error);
-      } finally {
-        if (token !== null){
-
-        setLoading(false);
       }
     }
-  }
     fetchData();
-  }, [itemId]);
+  }, [props.movieId]);
 
-  async function handleClick() {
-    setLoading(true);
+  const addFavorite = async () => {
     try {
-      const response = await axios.post(`/api/favorites/${itemId}`, {
-        isFavorite: !isFavorite
-      });
-      setFavorite(response.data.isFavorite);
+      const response = await axios.post(`http://localhost:8000/api/favorites/${props.movieId}`);
+      setFavorite(response.data);
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false);
     }
-  }
+  };
+
+  const removeFavorite = async () => {
+    try {
+      const response = await axios.delete(`http://localhost:8000/api/favorites/${props.movieId}`);
+      setFavorite(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <button
-      className={`btn btn-sm favorite-button ${isLoading ? "loading" : ""}`}
-      onClick={handleClick}
-      disabled={isLoading}
-    >
-      {isLoading ? (
-        <i className="bi bi-spinner-fill "></i>
+    <div>
+      {favorite ? (
+        <button
+          type="button"
+          className="btn btn-outline-danger"
+          onClick={removeFavorite}
+        >
+          <i className="bi bi-suit-heart-fill"></i>
+        </button>
       ) : (
-        <i className={`bi ${isFavorite ? "bi-heart-fill" : "bi-heart"}`} />
+        <button
+          type="button"
+          className="btn btn-outline-danger"
+          onClick={addFavorite}
+        >
+          <i className="bi bi-suit-heart"></i>
+        </button>
       )}
-      Favorite
-    </button>
+    </div>
   );
 }
 

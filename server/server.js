@@ -20,8 +20,12 @@ require("./config/db.config");
 //importing user routes
 require('./routes/user.routes')(app);
 
+// add favorites routes
+const favoritesRoutes = require('./routes/favorites.routes');
+app.use('/api/favorites', favoritesRoutes);
+
 const PORT = 8000;
 
 app.listen(PORT, function () {
     console.log(`The server has started on PORT: ${PORT}`)
-})
+});

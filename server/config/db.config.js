@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 
 mongoose
-  .connect('mongodb://localhost/MovieDb',{
+  .connect('mongodb://127.0.0.1:27017/MovieDb',{
     useNewUrlParser:true,
     useUnifiedTopology:true
   })
