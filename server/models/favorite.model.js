@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('./users.model');
+const User = require('./user.model');
 
 const favoriteSchema = new mongoose.Schema({
     userId: {
