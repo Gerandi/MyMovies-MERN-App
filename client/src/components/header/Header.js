@@ -2,7 +2,9 @@ import React, { useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './header.scss';
 import logo from '../../assets/main-logo.png';
-
+import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const headerNav = [
   {
     display: 'Home',
@@ -10,7 +12,7 @@ const headerNav = [
   },
   {
     display: 'MyFavorites',
-    path: '/favorites'
+    path: '/favorites',
   },
   {
     display: 'Movies',
@@ -20,21 +22,28 @@ const headerNav = [
     display: 'Shows',
     path: '/tv',
   },
-  {
-    display: 'Login',
-    path: '/login',
-  },
- 
+  
   
 ];
 
 const Header = () => {
+  const navigate = useNavigate()
+
   const { pathname } = useLocation();
   const headerRef = useRef(null);
-
+  const [token, setToken] = useState(localStorage.getItem("jwt"));
+  const [loggeduseremail] = useState(localStorage.getItem("loggeduser"))
+  const [loggeduser,setLogedduser] = useState()
   const active = headerNav.findIndex((e) => e.path === pathname);
-
+  const logoutHandler = () => {
+    localStorage.removeItem("jwt")
+    window.location.reload()
+  }
+  const loginHandler = () => {
+    navigate('/login')
+  }
   useEffect(() => {
+    axios.get(`http://localhost:8000/api/users/loggeduser?email=${loggeduseremail}`).then(res=>{setLogedduser(res.data.user)})
     const shrinkHeader = () => {
       if (
         document.body.scrollTop > 100 ||
@@ -64,6 +73,12 @@ const Header = () => {
               <Link to={e.path}>{e.display}</Link>
             </li>
           ))}
+            {token ==null ?<li className='signout' onClick={loginHandler}>Login
+            </li>:<l1 >Hi, {loggeduser?.name}</l1>}
+
+            {token !==null ?<li className='signout' onClick={logoutHandler}>Logout
+             <i style={{marginLeft:"7px"}} class="bi bi-box-arrow-right"></i>
+            </li>:null}
         </ul>
       </div>
     </div>

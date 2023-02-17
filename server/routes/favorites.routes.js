@@ -3,8 +3,11 @@ const router = express.Router();
 
 const favorites = require("../controllers/favorites.controller.js");
 
-// Create a Favorite
+// Create a Favorite for a user by movieId
 router.post("/", favorites.create);
+
+// Get one Favorite by movieId and userId
+router.get("/:userId/:movieId", favorites.findOneByMovieIdAndUserId);
 
 // Retrieve all Favorites by userId
 router.get("/:userId", favorites.findAllByUserId);
@@ -14,5 +17,6 @@ router.delete("/:userId/:movieId", favorites.deleteByMovieIdAndUserId);
 
 // Delete all Favorites of a user
 router.delete("/:userId", favorites.deleteAll);
+
 
 module.exports = router;
