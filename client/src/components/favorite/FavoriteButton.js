@@ -7,9 +7,12 @@ function FavoriteButton({ userId, movieId }) {
   const [favorite, setFavorite] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("jwt"));
   const [btnndisable,setBtnndisable] = useState()
-
+  const [loggeduseremail] = useState(localStorage.getItem("loggeduser"))
+  const [loggeduser,setLogedduser] = useState()
   
   useEffect(() => {
+    axios.get(`http://localhost:8000/api/users/loggeduser?email=${loggeduseremail}`).then(res=>{setLogedduser(res.data.user)})
+
     if(token == null){
       setBtnndisable({backgroundColor:"white",color:"black",boxShadow:"0px 0px 2px 2px",cursor:"not-allowed"})
     }
