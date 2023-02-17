@@ -24,7 +24,6 @@ const VideoList = (props) => {
       <Swiper
         spaceBetween={30}
         navigation={true}
-        modules={[Navigation]}
         draggable={true}
         pagination={{ clickable: true }}
         autoplay={{ delay: 5000 }}
