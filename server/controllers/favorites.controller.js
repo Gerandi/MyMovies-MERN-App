@@ -27,6 +27,25 @@ exports.findAllByUserId = async (req, res) => {
   }
 };
 
+// Retrieve a favorite movie for a given user by movie id
+exports.findOneByMovieIdAndUserId = async (req, res) => {
+  try {
+    const favorite = await Favorite.findOne({
+      userId: req.params.userId,
+      movieId: req.params.movieId,
+    });
+
+    if (!favorite) {
+      return res.status(404).json({ message: 'Favorite not found' });
+    }
+
+    res.status(200).json(favorite);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to retrieve favorite' });
+  }
+};
+
 // Delete a favorite movie for a given user by movie id
 exports.deleteByMovieIdAndUserId = async (req, res) => {
   try {
