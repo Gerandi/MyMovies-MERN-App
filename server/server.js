@@ -11,6 +11,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
+
 // configure the server to accept and update the cookies
 app.use(cookieParser());
 

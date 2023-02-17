@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../../api/apiFavorites";
+
 import "./favorite-button.scss";
 
 function FavoriteButton({ userId, movieId }) {
   const [favorite, setFavorite] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("jwt"));
   const [btnndisable,setBtnndisable] = useState()
+
   
   useEffect(() => {
     if(token == null){
