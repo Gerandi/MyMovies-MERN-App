@@ -4,7 +4,7 @@ const Favorite = require('../models/favorite.model');
 exports.create = async (req, res) => {
   try {
     const favorite = new Favorite({
-      userId: req.user._id, // Get user id from the authenticated user
+      userId: req.params.userId, // Get user id from the authenticated user
       movieId: req.body.movieId,
     });
 
@@ -12,7 +12,11 @@ exports.create = async (req, res) => {
     res.status(201).json(savedFavorite);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Failed to create favorite movie' });
+    if (error.code === 11000) {
+      res.status(400).json({ message: 'Favorite already exists' });
+    } else {
+      res.status(500).json({ message: 'Failed to create favorite movie' });
+    }
   }
 };
 
@@ -42,7 +46,11 @@ exports.findOneByMovieIdAndUserId = async (req, res) => {
     res.status(200).json(favorite);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Failed to retrieve favorite' });
+    if (error.name === 'CastError') {
+      res.status(400).json({ message: 'Invalid user ID or movie ID' });
+    } else {
+      res.status(500).json({ message: 'Failed to retrieve favorite' });
+    }
   }
 };
 

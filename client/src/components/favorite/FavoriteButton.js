@@ -18,7 +18,7 @@ function FavoriteButton({ userId, movieId }) {
     }
     async function fetchData() {
       try {
-        const response = await axios.get(`/api/favorites/${userId}/${movieId}`);
+        const response = await axios.get(`/api/favorites/${loggeduser._id}/${movieId}`);
         setFavorite(response.data);
       } catch (error) {
         console.error(error);
@@ -29,16 +29,17 @@ function FavoriteButton({ userId, movieId }) {
 
   const addFavorite = async () => {
     try {
-      const response = await axios.post(`/api/favorites/${userId}/${movieId}`);
+      const response = await axios.post(`/api/favorites/` , { userId, movieId });
       setFavorite(response.data);
     } catch (error) {
       console.error(error);
     }
+
   };
 
   const removeFavorite = async () => {
     try {
-      const response = await axios.delete(`/api/favorites/${userId}/${movieId}`);
+      const response = await axios.delete(`/api/favorites/${loggeduser._id}/${movieId}`);
       setFavorite(response.data);
     } catch (error) {
       console.error(error);

@@ -13,5 +13,7 @@ const favoriteSchema = new mongoose.Schema({
     },
 });
 
+// add unique compound index to prevent duplicate favorites
+favoriteSchema.index({ userId: 1, movieId: 1 }, { unique: true });
 
 module.exports = mongoose.model('Favorite', favoriteSchema);
