@@ -3,8 +3,8 @@ const router = express.Router();
 
 const favorites = require("../controllers/favorites.controller.js");
 
-// Create a Favorite
-router.post("/", favorites.create);
+// Create a Favorite for a user by movieId
+router.post("/:userId/:movieId", favorites.create);
 
 // Get one Favorite by movieId and userId
 router.get("/:userId/:movieId", favorites.findOneByMovieIdAndUserId);
