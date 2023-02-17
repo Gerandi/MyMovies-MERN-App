@@ -26,6 +26,7 @@
         transform: translateY(-250px);
         transition: transform 0.6s ease, opacity 0.6s ease;
         position: relative;
+        border-radius: $border-radius;
 
         @include tablet {
             width: 80%;
@@ -34,9 +35,9 @@
         &__close {
             position: absolute;
             color: $main-color;
-            right: 5px;
+            right: 10px;
             top: 5px;
-            font-size: 1.5rem;
+            font-size: 1.9rem;
             cursor: pointer;
 
             &:hover {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SwiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Button, { OutlineButton } from '../button/Button';
+import Button, { OutlineButton, TrailerButton } from '../button/Button';
 import Modal, { ModalContent } from '../modal/Modal';
 import tmdbApi, { category, movieType } from '../../api/tmdbApi';
 import apiConfig from '../../api/apiConfig';
@@ -95,9 +95,9 @@ const HeroSlideItem = (props) => {
             <Button onClick={() => navigate('/movie/' + item.id)}>
               Details
             </Button>
-            <OutlineButton className='trailer' onClick={setModalActive}>
+            <TrailerButton onClick={setModalActive}>
             <i class="bi bi-play"> </i>Trailer
-            </OutlineButton>
+            </TrailerButton>
           </div>
         </div>
         <div className='hero-slide__item__content__poster'>
@@ -118,7 +118,7 @@ const TrailerModal = (props) => {
   return (
     <Modal active={false} id={`modal_${item.id}`}>
       <ModalContent onClose={onClose}>
-        <iframe
+        <iframe 
           ref={iframeRef}
           width='100%'
           height='500px'

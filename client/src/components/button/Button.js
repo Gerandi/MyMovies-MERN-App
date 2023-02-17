@@ -24,6 +24,17 @@ export const OutlineButton = (props) => {
   );
 };
 
+export const TrailerButton = (props) => {
+  return (
+    <Button
+      className={`btn-trailer ${props.className}`}
+      onClick={props.onClick ? () => props.onClick() : null}
+    >
+      {props.children}
+    </Button>
+  );
+};
+
 Button.propTypes = {
   onClick: PropTypes.func,
 };
