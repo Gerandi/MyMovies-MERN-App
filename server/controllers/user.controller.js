@@ -81,5 +81,19 @@ module.exports = {
         res.json({
             message:"You have successfuly logged out"
         })
+    },
+    getUserByEmail: (req, res) => {
+        User.findOne({ email: req.query.email }) // Use req.query.email to get the email from the request URL
+            .then((user) => {
+                if (!user) {
+                    res.status(404).json({ message: "User not found" });
+                } else {
+                    res.json({ user });
+                }
+            })
+            .catch((err) => {
+                console.log("Error while getting user by email", err);
+                res.status(500).json({ message: "Internal server error" });
+            });
     }
 }
