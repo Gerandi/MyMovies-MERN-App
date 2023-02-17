@@ -37,16 +37,24 @@ button {
     background-color: $main-color;
 }
 
+.btn-trailer {
+    border: 3px solid $white;
+    background-color: transparent;
+    color: $white;
+    box-shadow: 0px 0px 7px 8px hwb(0 76% 24% / 0.138);
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-trailer:hover {
+    border: 3px solid $white;
+    box-shadow: 0px 0px 7px 15px #c3c3c33c;
+    color: $main-color;
+    background-color: $white;
+    transition: box-shadow 0.3s ease;
+}
+
 .btn.small {
     border-width: 2px;
     padding: 0.25rem 1.5rem;
     font-size: 1rem;
-}
-
-.btn-trailer {
-    border: 3px solid $main-color;
-    background-color: transparent;
-    color: $main-color;
-    box-shadow: unset;
-    transition: color 0.3s ease, background-color 0.3s ease;
 }
