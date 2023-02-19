@@ -16,8 +16,7 @@ function FavoriteView() {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
 
   useEffect(() => {
-    // const userId = localStorage.getItem("userId");
-    const userId = "63ef4ae6725f5ee3273ac5e6";
+    const userId = localStorage.getItem("userid");
     async function fetchData() {
       try {
         const response = await apiFavorites.get(`/api/favorites/${userId}`);
