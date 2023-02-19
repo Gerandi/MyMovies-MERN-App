@@ -28,6 +28,7 @@ const Header = () => {
     localStorage.removeItem("loggeduser")
     localStorage.removeItem("userid")
     window.location.reload()
+    setIsOpen(false);
   }
   const loginHandler = () => {
     navigate('/login')
@@ -51,6 +52,11 @@ const Header = () => {
     };
   }, []);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
 
   
   return (
@@ -66,16 +72,31 @@ const Header = () => {
               <Link to={e.path}>{e.display}</Link>
             </li>
           ))}
-            {token ==null ?<li className='signout' onClick={loginHandler}><i class="bi bi-box-arrow-in-left"></i> Login
-            </li>:<l1 >Hi, {loggeduser?.name}</l1>}
-
-            {token !==null ?<li className='signout' onClick={logoutHandler}>Logout
-             <i style={{marginLeft:"7px"}} class="bi bi-box-arrow-right"></i>
-            </li>:null}
         </ul>
+        <div className='header__nav'>
+          {token == null ? (
+            <li className='header__nav' onClick={loginHandler}>
+              <i class="bi bi-box-arrow-in-left"></i> Login 
+            </li>
+          ) : (
+            <div class="dropdown">
+              <div class="dropdown__toggle" onClick={handleToggle}>
+                <i class="bi bi-person-circle"></i><l1>Hi, {loggeduser?.name}</l1>
+              </div>
+              {isOpen && (
+                <div class="dropdown__menu">
+                  <li className="signout" onClick={logoutHandler}>
+                    Logout <i class="bi bi-box-arrow-right"></i>
+                  </li>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
+  
 };
 
 export default Header;
