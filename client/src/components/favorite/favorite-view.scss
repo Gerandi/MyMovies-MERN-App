@@ -1,0 +1,48 @@
+@use "../../scss/" as *;
+
+
+.favorite-view {
+  margin: auto;
+  width: 80%;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+
+  .favorite-table {
+    border-collapse: collapse;
+    width: 100%;
+    align-items: center;
+
+    .favorite-header {
+      background-color: #f1f1f1;
+      font-weight: bold;
+      padding: 0.5rem;
+      text-align: left;
+    }
+
+    .favorite-poster {
+      height: 10rem;
+      border-radius: $border-radius;
+    }
+
+    .favorite-remove-button {
+      background-color: #f44336;
+      border-radius: $border-radius;
+      border: none;
+      color: white;
+      padding: 0.5rem;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size:
+      16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+    .favorite-remove-button:hover {
+      background-color: #da190b;
+    }
+
+  }
+
+}
