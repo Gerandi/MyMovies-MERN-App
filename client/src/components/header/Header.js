@@ -62,6 +62,8 @@ const Header = () => {
     };
   }, []);
 
+
+  
   return (
     <div ref={headerRef} className='header'>
       <div className='header__wrap container'>
@@ -75,7 +77,7 @@ const Header = () => {
               <Link to={e.path}>{e.display}</Link>
             </li>
           ))}
-            {token ==null ?<li className='signout' onClick={loginHandler}>Login
+            {token ==null ?<li className='signout' onClick={loginHandler}><i class="bi bi-box-arrow-in-left"></i> Login
             </li>:<l1 >Hi, {loggeduser?.name}</l1>}
 
             {token !==null ?<li className='signout' onClick={logoutHandler}>Logout

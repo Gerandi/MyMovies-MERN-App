@@ -1,7 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
+import PageHeader from '../page-header/PageHeader';
+import logo from '../../assets/main-logo.png';
+import './Signup.scss';
+
 const Signup = () => {
     const navigate = useNavigate();
     const [name, setUsername] = useState("");
@@ -21,15 +26,41 @@ const Signup = () => {
         .catch(err=>console.log(err))
     }
     return (
-        <div className='login-container'>
-            <h1>Register</h1>
-            <label>Username :<input className='inputforms' type='text' onChange={(e) => { setUsername(e.target.value) }} ></input></label>
-            <label>Full Name :<input className='inputforms' type='text' onChange={(e) => { setFullName(e.target.value) }} ></input></label>
-            <label>Email :<input className='inputforms' type='text' onChange={(e) => { setEmail(e.target.value) }} ></input></label>
-            <label>Password :<input className='inputforms' type='password' onChange={(e) => { setPassword(e.target.value) }} ></input></label>
-            <label>Confirm Password :<input className='inputforms' type='password' onChange={(e) => { setConfirmPassword(e.target.value) }} ></input></label>
-            <button onClick={registerHandler} class="btn">Signup</button>
-        </div>
+        <>
+            <PageHeader>
+                Register
+            </PageHeader>
+
+            <div className='signup-page'>
+                <div className='signup-left'>
+                        <div className='logo'>
+                            <img src={logo} alt='MyMovies' />
+                            <Link to='/'>MyMovies</Link>
+                        </div><br></br>
+                        <h3>The best Movie Database App for you</h3>
+                        <p>Please register to start using our service.</p>
+                </div>
+                <div className='signup-right'>
+                    <div className='signup-right-gradient'>
+                        <div className='register-container'>
+                            <h1>Register</h1>
+                            <label>Username:</label>
+                            <input className='inputforms' type='text' onChange={(e) => { setUsername(e.target.value) }} placeholder="Enter your username" />
+                            <label>Name:</label>
+                            <input className='inputforms' type='text' onChange={(e) => { setFullName(e.target.value) }} placeholder="Enter your full name" />
+                            <label>Email:</label>
+                            <input className='inputforms' type='text' onChange={(e) => { setEmail(e.target.value) }} placeholder="Enter your email" />
+                            <label>Password:</label>
+                            <input className='inputforms' type='password' onChange={(e) => { setPassword(e.target.value) }} placeholder="Enter your password" />
+                            <label>Confirm Password:</label>
+                            <input className='inputforms' type='password' onChange={(e) => { setConfirmPassword(e.target.value) }} placeholder="Confirm your password" />
+                            <p>Do you already have an account?<a className='rg-here' href='/login'>Login here</a>.</p>
+                            <button onClick={registerHandler} class="register-btn">Signup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     );
 };
 

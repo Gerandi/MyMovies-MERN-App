@@ -17,6 +17,7 @@ function FavoriteView() {
 
   useEffect(() => {
     const userId = localStorage.getItem("userid");
+
     async function fetchData() {
       try {
         const response = await apiFavorites.get(`/api/favorites/${userId}`);
@@ -44,8 +45,7 @@ function FavoriteView() {
   //removes the movie from the favorite list
 
   const removeFavorite = (movieId) => {
-    // const userId = localStorage.getItem("userId");
-    const userId = "63ef4ae6725f5ee3273ac5e6";
+    const userId = localStorage.getItem("userid");
     async function fetchData() {
       try {
         const response = await apiFavorites.delete(
@@ -60,10 +60,6 @@ function FavoriteView() {
     }
     fetchData();
   };
-
-  if (localStorage.getItem("token") === null) {
-    return <div>Login to view favorite movies and shows.</div>;
-  }
 
   
 
