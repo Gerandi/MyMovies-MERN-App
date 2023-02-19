@@ -2,7 +2,6 @@
 // create a vew to view all the favorite items in a table
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import tmdbApi from '../../api/tmdbApi';
 import apiFavorites from '../../api/apiFavorites';
 import "./favorite-view.scss";

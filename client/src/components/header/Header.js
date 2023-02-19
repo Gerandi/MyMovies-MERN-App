@@ -75,7 +75,7 @@ const Header = () => {
         </ul>
         <div className='header__nav'>
           {token == null ? (
-            <li className='header__nav' onClick={loginHandler}>
+            <li className='signout' onClick={loginHandler}>
               <i class="bi bi-box-arrow-in-left"></i> Login 
             </li>
           ) : (

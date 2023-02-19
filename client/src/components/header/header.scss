@@ -1,3 +1,6 @@
+
+
+
 @use "../../scss/" as *;
 
 .logo {
@@ -31,6 +34,7 @@
     height: $header-shrink-height;
     color: $txt-color;
     background-color: $body-bg;
+    box-shadow: $box-shadow;
   }
 
   &__wrap {
@@ -103,6 +107,20 @@
 .dropdown {
   position: relative;
 
+  &.shrink {
+    height: $header-shrink-height;
+    color: $txt-color;
+    background-color: $body-bg;
+
+    .signout {
+      color: $txt-color;
+
+      &:hover {
+        color: $main-color;
+      }
+    }
+  }
+  
   &__toggle {
     cursor: pointer;
     display: flex;
@@ -149,6 +167,7 @@
       color: $white;
       font-size: 1.2rem;
       cursor: pointer;
+      
 
       &:hover {
         color: $main-color;
