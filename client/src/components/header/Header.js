@@ -11,7 +11,7 @@ const headerNav = [
     path: '/',
   },
   {
-    display: 'MyFavorites',
+    display: 'Favorites',
     path: '/favorites',
   },
   {

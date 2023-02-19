@@ -30,7 +30,7 @@ function FavoriteView() {
     fetchData();
   }, []);
 
-// make a function that gets the movieId from the favoriteMovies state and makes calls to tmdb api to get the movie details and store it in a state
+//get the movieId from the favoriteMovies state and makes calls to tmdb api to get the movie details and store it in a state
 
   const [movieDetails, setMovieDetails] = useState([]);
 
@@ -42,7 +42,7 @@ function FavoriteView() {
     });
   }, [favoriteMovies]);
 
-  // make a function that removes the movie from the favorite list
+  //removes the movie from the favorite list
 
   const removeFavorite = (movieId) => {
     // const userId = localStorage.getItem("userId");
@@ -61,11 +61,14 @@ function FavoriteView() {
     }
     fetchData();
   };
+
+  if (localStorage.getItem("token") === null) {
+    return <div>Login to view favorite movies and shows.</div>;
+  }
+
   
 
   // return the movie details in a table and add a button to remove the movie from the favorite list
-
-
   return (
     <div className="container">
       <PageHeader>
@@ -75,24 +78,26 @@ function FavoriteView() {
         <table className="favorite-table">
           <thead>
             <tr>
-              <th className="favorite-header">Movie Title</th>
-              <th className="favorite-header">Movie Poster</th>
+              <th className="favorite-header">Poster</th>
+              <th className="favorite-header">Title</th>
               <th className="favorite-header">Voting Average</th>
               <th className="favorite-header">Release Year</th>
-              <th className="favorite-header">Remove from Favorite</th>
+              <th className="favorite-header">Remove</th>
             </tr>
           </thead>
           <tbody>
             {movieDetails.map((movie) => (
               <tr key={movie.id}>
                 <td>
+                <a className="title-link" href={`/movie/${movie.id}`}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                     alt={movie.title}
                     className="favorite-poster"
                   />
+                  </a>
                 </td>
-                <td>{movie.title}</td>
+                <td> <a className="title-link" href={`/movie/${movie.id}`}>{movie.title}</a></td>
                 <td>{movie.vote_average}</td>
                 <td>{movie.release_date}</td>
                 <td>
@@ -100,7 +105,7 @@ function FavoriteView() {
                     onClick={() => {
                       removeFavorite(movie.id);
                     }}
-                    className="favorite-remove-button"
+                    className="favorite-btn"
                   >
                     Remove
                   </button>
