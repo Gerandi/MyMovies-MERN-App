@@ -5,26 +5,14 @@ import logo from '../../assets/main-logo.png';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const headerNav = [
-  {
-    display: 'Home',
-    path: '/',
-  },
-  {
+const headerNav = [  {    display: 'Home',    path: '/',  },  {    display: 'Movies',    path: '/movie',  },  {    display: 'Shows',    path: '/tv',  },];
+
+if (localStorage.getItem("loggeduser") !== null) {
+  headerNav.splice(1, 0, {
     display: 'Favorites',
     path: '/favorites',
-  },
-  {
-    display: 'Movies',
-    path: '/movie',
-  },
-  {
-    display: 'Shows',
-    path: '/tv',
-  },
-  
-  
-];
+  });
+}
 
 const Header = () => {
   const navigate = useNavigate()
@@ -46,6 +34,7 @@ const Header = () => {
   }
   useEffect(() => {
     axios.get(`http://localhost:8000/api/users/loggeduser?email=${loggeduseremail}`).then(res=>{setLogedduser(res.data.user)})
+    console.log(localStorage.getItem("loggeduser"))
     const shrinkHeader = () => {
       if (
         document.body.scrollTop > 100 ||

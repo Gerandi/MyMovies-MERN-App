@@ -12,7 +12,8 @@ const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState();
-
+    const [ emailError,setEmailError] = useState()
+    const [passwordError,setPasswordError] = useState()
     useEffect(() => {
         axios.get(`http://localhost:8000/api/users/loggeduser?email=${email}`).then(res => { console.log(res.data.user._id) })
     }, [email])
@@ -34,7 +35,7 @@ const Login = () => {
 
 
     return (
-        <>
+        <div onClick={()=>{setEmailError();setPasswordError()}}>
             <PageHeader>
                 Login
             </PageHeader>
@@ -48,21 +49,34 @@ const Login = () => {
                     <h3>The best Movie Database App for your</h3>
                     <p>Please login to continue using our service.</p>
                 </div>
-            <div className='form-container'>
+            <div className='form-container' >
                     <div className='form'>
                         <h1>Login</h1>
                         <label>Email:</label>
-                        <input className='inputforms' type='text' onChange={(e) => { setEmail(e.target.value) }} placeholder="example@example.com" ></input>
+                        <input className='inputforms' type='email' onChange={(e) => {setEmail(e?.target?.value);
+                         if(e?.target?.value?.length < 6) {
+                            setEmailError("*Email must be at least 6 characters long")
+                         }else{
+                            setEmailError()
+                         }
+                         }} placeholder="example@example.com" ></input>
+                         <p style={{color:"red",fontSize:"14px"}}>{emailError}</p>
                         <label>Password:</label>
-                        <input className='inputforms' type='password' onChange={(e) => { setPassword(e.target.value) }} placeholder="Enter your password"></input>
+                        <input className='inputforms' type='password' onChange={(e) => {setPassword(e?.target?.value);
+                         if(e?.target?.value?.length < 8) {
+                            setPasswordError("*Password must be at least 8 characters long")
+                         }else{
+                            setPasswordError()
+                         } }} placeholder="Enter your password"></input>
+                        <p style={{color:"red",fontSize:"14px"}}>{passwordError}</p>
                         <p>Not a user? No problem you can <a className='rg-here' href='/register'>register here</a>.</p>
-                        <button onClick={LoginHandle} class="login-btn">
+                 {email?.length<6 || password?.length<8 ? null :<button  onClick={LoginHandle} class="login-btn">
                         <i class="bi bi-box-arrow-in-left"></i>
-                            Login</button>
+                            Login</button>}
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
