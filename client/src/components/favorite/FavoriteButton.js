@@ -10,7 +10,7 @@ function FavoriteButton({ movieId }) {
   const [loggeduseremail] = useState(localStorage.getItem("loggeduser"))
   const [loggeduser, setLogedduser] = useState()
 
-  const userId = "63ef4ae6725f5ee3273ac5e6";
+  const userId = localStorage.getItem("userid");
 
   useEffect(() => {
     axios.get(`http://localhost:8000/api/users/loggeduser?email=${loggeduseremail}`).then(res => { setLogedduser(res.data.user) })

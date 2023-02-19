@@ -36,7 +36,9 @@ const Header = () => {
   const [loggeduser,setLogedduser] = useState()
   const active = headerNav.findIndex((e) => e.path === pathname);
   const logoutHandler = () => {
-    localStorage.removeItem("jwt")
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("loggeduser")
+    localStorage.removeItem("userid")
     window.location.reload()
   }
   const loginHandler = () => {

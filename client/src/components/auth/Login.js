@@ -1,5 +1,5 @@
 // todo
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import './Login.scss'
 import axios from 'axios';
@@ -9,12 +9,20 @@ const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState();
+    useEffect(()=>{
+        axios.get(`http://localhost:8000/api/users/loggeduser?email=${email}`).then(res => { console.log(res.data.user._id) })
+
+    },[email])
     const user = {
         email,
         password
     }
     const LoginHandle = () => {
-        axios.post('http://localhost:8000/api/users/login', user).then(res => {localStorage.setItem('jwt', '124q3cdfgdraw3q244444w555cfgudtse57w34s5eu8cfise58');localStorage.setItem('loggeduser',email); navigate("/");window.location.reload()})
+        axios.post('http://localhost:8000/api/users/login', user).then(res => {localStorage.setItem('jwt', '124q3cdfgdraw3q244444w555cfgudtse57w34s5eu8cfise58');
+        axios.get(`http://localhost:8000/api/users/loggeduser?email=${email}`).then(res => { localStorage.setItem("userid",res.data.user._id) });
+        localStorage.setItem('loggeduser',email); 
+        navigate("/");
+        window.location.reload()})
     }
     return (
         <div className='login-container'>
