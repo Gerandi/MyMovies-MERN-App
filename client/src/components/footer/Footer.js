@@ -27,7 +27,7 @@ const Footer = () => {
           </div>
           <div className='footer__content__menu'>
             <Link to='/'>Gerandi Matraku</Link>
-            <Link to='/'>Anxhelino</Link>
+            <Link to='/'>Anxhelino Cauli</Link>
             <Link to='/'>Olvi Xhaferaj</Link>
 
           </div>
